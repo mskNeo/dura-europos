@@ -10,8 +10,8 @@ app.use(cors());
 app.use(express.json());
 app.use('/api', apiRoutes);
 
-app.get('/', (req, res) => {
-    res.send("hello!");
-});
+// app.get('/', (req, res) => {
+//     res.send("hello from the server!");
+// });
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
