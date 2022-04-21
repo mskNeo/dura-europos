@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './App.css';
+import './styles/App.css';
 import { getHome } from './api';
 import Map from './routes/Map';
+import Navigation from './components/Navigation';
 
 function App() {
   const [ name, setName ] = useState('');
@@ -18,7 +19,8 @@ function App() {
   
   return (
     <div>
-      <h1>Hello {name}</h1>
+      <h1>Dura-Europos Hordes for {name}'s Group</h1>
+      <Navigation />
       <BrowserRouter>
         <Routes>
           <Route path='/map' element={<Map />}/>

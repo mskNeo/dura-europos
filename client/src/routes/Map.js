@@ -13,7 +13,7 @@ function Map() {
     }, [])
 
     return (
-        <div>
+        <div id="map">
             <h1>This page is the {title} page.</h1> 
         </div>
     )
