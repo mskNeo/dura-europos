@@ -14,7 +14,7 @@ function Map() {
 
     return (
         <div id="map">
-            <h1>This page is the {title} page.</h1> 
+            <h1>This is the {title} page.</h1> 
         </div>
     )
 }
