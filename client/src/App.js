@@ -1,22 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import * as api from './api';
+import React from 'react';
+import RoutesController from './components/RoutesController';
 
 function App() {
-  const [ name, setName ] = useState('');
-  
-  useEffect(() => {
-    api.fetchUrl()
-    .then((response) => {
-      const data = response.data;
-      console.log(data);
-      setName(data.name);
-    });
-  }, []);
   
   return (
-    <div className="App">
-      <h1>Hello {name}</h1>
+    <div>
+      <h1>Dura-Europos Hordes</h1>
+      <RoutesController />
     </div>
   );
 }
