@@ -9,8 +9,8 @@ dotenv.config();
 
 const PORT = process.env.PORT || 3001;
 const DB_PASSWORD = process.env.DB_PASSWORD;
-const DB_COLLECTION = process.env.DB_COLLECTION;
-const DB_CONNECTION = `mongodb+srv://durageomap:${DB_PASSWORD}@dura-coins.pdbgd.mongodb.net/${DB_COLLECTION}?retryWrites=true&w=majority`;
+const DB_NAME = process.env.DB_NAME;
+const DB_CONNECTION = `mongodb+srv://durageomap:${DB_PASSWORD}@dura-coins.pdbgd.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
 
 app.use(cors());
 app.use(express.json());
