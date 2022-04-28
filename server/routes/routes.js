@@ -1,10 +1,10 @@
 import express from 'express';
-import { helloWorld, getMap, getCoins } from '../controllers/routes.js';
+import { helloWorld, getMap, getAllCoins } from '../controllers/routes.js';
 
 const router = express.Router();
 
 router.get('/', helloWorld);
 router.get('/map', getMap);
-router.get('/coins', getCoins);
+router.get('/coins', getAllCoins);
 
 export default router;

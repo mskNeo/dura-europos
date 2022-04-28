@@ -8,19 +8,15 @@ export const getMap = (req, res) => {
     res.send({"page": "Map"});
 }
 
-export const getCoins = (req, res) => {
-    // try {
-    // const coinEntries = await CoinEntry.find()
-    CoinEntry.find({}, (err, result) => {
-        if (err) console.log(err);
-        else {
-            res.json(result);
-        }
-    })
-    // console.log(coinEntries);
-    // res.sendStatus(200).json(coinEntries);
+export const getAllCoins = (req, res) => {
     
-    // } catch (err) {
-    //     res.sendStatus(404).json({ message: err.message });
-    // }
+    // find all coins and return in a json
+    CoinEntry
+        .find({}, 
+            (err, result) => {
+                if (err) console.log(err);
+                else {
+                    res.json(result);
+                }
+            });
 }
