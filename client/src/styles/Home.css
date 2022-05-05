@@ -1,0 +1,54 @@
+.homepage {
+    display: flex;
+    padding: 10px;
+}
+
+.pageText{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.heading {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 39px;
+    text-decoration-line: underline;
+    padding-bottom: 10px;
+}
+
+.subheading {
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 19px;
+    padding-bottom: 15px;
+}
+
+.body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 19px;
+    text-align: justify;
+    padding-bottom: 15px;
+}
+
+.thanks {
+    font-family: 'Inter', sans-serif;
+    font-style: italic;
+    font-weight: 200;
+    font-size: 15px;
+    line-height: 19px;
+    text-align: justify;
+    padding-bottom: 15px;
+    padding-top: 200px;
+}
+
+.duraHoards {
+    padding: 20px;
+    height: 709px;
+    width: 427;
+}

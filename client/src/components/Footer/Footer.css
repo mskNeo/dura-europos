@@ -1,0 +1,69 @@
+.FooterItems {
+    /* position: absolute; */
+    /* top: 500px; */
+    background: #043A7E;
+    height: 140px;
+    display: flex;
+    /* justify-content: center; */
+    /* position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0; */
+    align-items: center;
+}
+
+.yaleLogo {
+    margin-top: 7px;
+    margin-left: 23px;
+    width: 300px;
+}
+
+.copyright {
+    margin-left: 0px;
+    color: #fff;
+    font-size: 0.8rem;
+    font-family: 'Inter', sans-serif;
+    margin-right: 6px;
+}
+
+.copyrightText {
+    margin-top: 5px;
+    margin-left: 23px;
+    color: #fff;
+    font-size: 0.8rem;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+}
+
+.gsasLogo {
+    margin-left: 45px;
+    width: 600px;
+}
+
+.yuagLogo {
+    margin-left: 45px;
+    width: 230px;
+}
+
+.links {
+    text-decoration: underline;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    margin-left: 45px;
+    margin-bottom: 5px;
+}
+
+.link-items {
+    color: #fff;
+    margin-left: 45px;
+    text-decoration: none;
+}
+
+.link-list {
+    list-style: none;
+}
+
+.link-items:hover {
+    color: #185bb1;
+    transition: all 0.2s ease-out;
+}
