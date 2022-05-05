@@ -67,3 +67,17 @@
     color: #185bb1;
     transition: all 0.2s ease-out;
 }
+
+@media screen and (max-width: 1450px) {
+
+    .yuagLogo {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1175px) {
+
+    .gsasLogo {
+        display: none;
+    }
+}
