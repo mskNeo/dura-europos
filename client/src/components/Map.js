@@ -13,8 +13,8 @@ function Map() {
     }, [])
 
     return (
-        <div id="map">
-            <h1>This is the {title} page.</h1> 
+        <div id="map" className="page">
+            <h1>This is the {title} page.</h1>
         </div>
     )
 }
