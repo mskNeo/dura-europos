@@ -44,7 +44,7 @@ function Home() {
                 </p>
 
                 <p className='thanks'>
-                    Special Thanks to Prof. Anne Chen, Prof. Holly Rushmeier, Cheng’an He, and Ziming Lui for everything this semester.
+                    Special thanks to Prof. Anne Chen, Prof. Holly Rushmeier, Cheng’an He, and Ziming Lui for everything this semester.
                 </p>
             </div>
             <img className="duraHoards" src={require('../assets/images/Dura-hoards.png')} alt="hoards"/>
