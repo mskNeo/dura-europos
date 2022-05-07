@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Home'
 import Map from './Map';
+import Catalogs from './Catalogs';
 import Navbar from '../components/Navbar/Navbar';
 
 export default function RoutesController() {
@@ -11,6 +12,8 @@ export default function RoutesController() {
             <Routes>
                 <Route path='/' element={<Home />}/>
                 <Route path='/map' element={<Map />}/>
+                <Route path='/catalogs' element={<Catalogs />}/>
+
             </Routes>
         </BrowserRouter>
     )
