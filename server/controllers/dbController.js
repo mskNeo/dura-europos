@@ -46,7 +46,7 @@ export const getCoinByEmperor = (req, res) => {
 
     // find coins based on emperor name in url path
     CoinEntry
-        .find({ "Emperor": emperorName }, 
+        .find({ "Emperor": { $regex: new RegExp(emperorName,"i") } }, 
             (err, result) => {
                 if (err) console.log(err);
                 else {
@@ -60,7 +60,7 @@ export const getCoinByDenomination = (req, res) => {
 
     // find coins based on denomination name in url path
     CoinEntry
-        .find({ "Denomination": denom }, 
+        .find({ "Denomination": { $regex: new RegExp(denom,"i") } }, 
             (err, result) => {
                 if (err) console.log(err);
                 else {
