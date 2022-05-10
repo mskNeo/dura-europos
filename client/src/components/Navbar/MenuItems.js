@@ -16,7 +16,7 @@ export const MenuItems = [
   },
   {
     title: 'Visualizations',
-    url: '#',
+    url: '/viz',
     cName: 'nav-links'
   },
 ]

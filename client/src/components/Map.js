@@ -2,6 +2,7 @@
 // import { getMap } from '../api';
 import { Component } from "react";
 import '../styles/Map.css'
+import Footer from "./Footer/Footer";
 
 class Map extends Component {
     // const [ title, setTitle ] = useState('');
@@ -190,6 +191,7 @@ class Map extends Component {
 
     render(){
       return (
+        <div>
         <div className="mappage">
             <nav className='options'>
                 <button className={this.state.m1} onClick={this.handleClick1}>
@@ -267,6 +269,8 @@ class Map extends Component {
                 <iframe className='pdf' src={this.state.pdf} width={this.state.width} height={796} title="myFrame"></iframe>
             </div>
             </div>
+        </div>
+        <Footer/>
         </div>
     )
   }

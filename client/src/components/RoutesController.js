@@ -4,6 +4,7 @@ import Home from './Home'
 import Map from './Map';
 import Catalogs from './Catalogs';
 import Navbar from '../components/Navbar/Navbar';
+import Viz from './Viz';
 
 export default function RoutesController() {
     return (
@@ -13,6 +14,7 @@ export default function RoutesController() {
                 <Route path='/' element={<Home />}/>
                 <Route path='/map' element={<Map />}/>
                 <Route path='/catalogs' element={<Catalogs />}/>
+                <Route path='/viz' element={<Viz />}/>
 
             </Routes>
         </BrowserRouter>

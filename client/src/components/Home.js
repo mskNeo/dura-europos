@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getHome } from '../api';
 import '../styles/Home.css'
+import Footer from './Footer/Footer';
 
 function Home() {
     // const [ name, setName ] = useState('');
@@ -15,6 +16,7 @@ function Home() {
     // }, []);
 
     return (
+        <div>
         <div className='homepage'>
             <div className='pageText'>
                 <h1 className='heading'>About</h1>
@@ -48,6 +50,8 @@ function Home() {
                 </p>
             </div>
             <img className="duraHoards" src={require('../assets/images/Dura-hoards.png')} alt="hoards"/>
+        </div>
+        <Footer/>
         </div>
     );
 }

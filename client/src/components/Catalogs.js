@@ -2,6 +2,7 @@
 // import { getMap } from '../api';
 import { Component } from "react";
 import '../styles/Catalogs.css'
+import Footer from "./Footer/Footer";
 import catalog1 from '../assets/Hoards/Hoards1&2.pdf'
 import catalog2 from '../assets/Hoards/Hoards3&4.pdf'
 import catalog3 from '../assets/Hoards/Hoard5.pdf'
@@ -94,6 +95,7 @@ class Catalogs extends Component {
 
     render(){
     return (
+      <div>
       <div className='catalogpage'>
 
         <div>
@@ -138,6 +140,8 @@ class Catalogs extends Component {
         </div>
 
 
+  </div>
+  <Footer/>
   </div>
     )
   }

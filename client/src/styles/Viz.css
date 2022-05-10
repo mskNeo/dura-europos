@@ -1,0 +1,38 @@
+.vizpage {
+    display: flex;
+    padding: 10px;
+}
+
+.filters {
+    display: flex;
+    padding-left: 20px;
+}
+
+.filter {
+    margin-left: 7px;
+}
+
+.filter_submit {
+    margin-top: 5px;
+    margin-left: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.toggle {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.graph {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 39px;
+    text-decoration-line: underline;
+    padding-bottom: 20px;
+}
+
