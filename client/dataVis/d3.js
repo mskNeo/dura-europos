@@ -1,0 +1,270 @@
+import * as d3 from 'd3';
+const node = document.createElement('div');
+// global vars
+let boxplot_on = false;
+let stats_by_emp = {};
+
+// helper functions 
+function jitter(width){
+let sign = Math.random() < 0.5 ? -1 : 1;
+return sign * Math.random() * width;
+}
+
+function boxplot(dataset, val){
+let arr = [];
+for(let i = 0; i < dataset.length; i++){
+    if(dataset[i].emperor === val){
+        arr.push(dataset[i].weight);
+    }
+}
+arr.sort();
+let stats = [
+    d3.quantile(arr,0),
+    d3.quantile(arr,0.25),
+    d3.quantile(arr,0.5),
+    d3.quantile(arr,0.75),
+    d3.quantile(arr,1),
+    d3.deviation(arr)
+];
+return stats;
+}
+
+let svg_w = 800;
+let svg_h = 600;
+let bottom_marg = 80;
+let left_marg = 100;
+let right_marg = 80;
+let top_marg = 20;
+
+let svg = d3.select(node).append("svg")
+.attr("width", svg_w)
+.attr("height", svg_h)
+.attr("style", "background-color:white");
+
+// CSV parser for test data
+
+function parser(d){
+    return{
+        num:parseInt(d["Coin #"]),
+        weight:parseFloat(d["Weight (Grams)"]),
+        emperor:d["Emperor"],
+        mint:d["Mint"]
+    };
+}
+
+// Test list of emperors (ordered)
+let emperors = ["Caracalla", "Macrinus", "Diadumenian", 
+"Elagabalus", "Gordian III", "Philip the Arab", "Trajan", "Trebonianus Gallus"];
+
+d3.csv("hoard_1_td.csv", parser).then((dataset)=> {
+
+    // min and max
+    let min_weight = d3.min(dataset, (d)=> { return d.weight; });
+    let max_weight = d3.max(dataset, (d)=> { return d.weight; });
+    //let max_weight = 25;
+
+    // height scaling
+    let y_scale = d3.scaleLinear()
+        .domain([min_weight, max_weight])
+        .range([svg_h - bottom_marg, top_marg]);
+
+    // width scaling 
+    let x_scale = d3.scaleBand()
+        .domain(emperors)
+        .range([left_marg, svg_w - right_marg])
+        .paddingInner(0.1)
+        .paddingOuter(0.1);
+
+    // points
+    svg.selectAll("circle")
+        .data(dataset)
+        .enter()
+        .filter((d) => {return !isNaN(d.weight); })
+        .filter((d) => {return d.weight < 100; })
+        .append("circle")
+        .attr("cx", (d) => {
+            return x_scale(d.emperor) + (x_scale.bandwidth()/2) + jitter(x_scale.bandwidth()/4);
+        })
+        .attr("cy", (d) => {
+            return y_scale(d.weight); 
+        })
+        .attr("r", 2)
+        .attr("fill", "black")
+        .on("mouseover", handleMouseover)
+        .on("mouseout", handleMouseout);
+
+    // box and whiskers
+    for(let i = 0; i < emperors.length; i++){
+        let emp = emperors[i];
+
+        let stats = boxplot(dataset, emp);
+        stats_by_emp[emp] = stats;
+
+        svg.append("rect")
+            .datum(stats)
+            .attr("x", x_scale(emp))
+            .attr("y", y_scale(stats[2]))
+            .attr("width", x_scale.bandwidth())
+            .attr("height", y_scale(stats[1]) - y_scale(stats[2]))
+            .attr("className","bp")
+            .on("mouseover",handleBoxplotMouseover)
+            .on("mouseout", handleMouseout);
+
+        svg.append("rect")
+            .datum(stats)
+            .attr("x", x_scale(emp))
+            .attr("y", y_scale(stats[3]))
+            .attr("width", x_scale.bandwidth())
+            .attr("height", y_scale(stats[2]) - y_scale(stats[3]))
+            .attr("className","bp")
+            .on("mouseover",handleBoxplotMouseover)
+            .on("mouseout", handleMouseout);
+
+        svg.append("line")
+            .datum(stats)
+            .attr("x1",x_scale(emp) + (x_scale.bandwidth()/2))
+            .attr("x2",x_scale(emp) + (x_scale.bandwidth()/2))
+            .attr("y1",y_scale(stats[3]))
+            .attr("y2",y_scale(stats[4]))
+            .attr("className","bp");
+
+        svg.append("line")
+            .datum(stats)
+            .attr("x1",x_scale(emp) + (x_scale.bandwidth()/2))
+            .attr("x2",x_scale(emp) + (x_scale.bandwidth()/2))
+            .attr("y1",y_scale(stats[0]))
+            .attr("y2",y_scale(stats[1]))
+            .attr("className","bp");
+
+        d3.selectAll(".bp")
+            .style("fill","red")
+            .style("fill-opacity","40%")
+            .style("stroke","black")
+            .style("stroke-width","2px")
+            .style("visibility","hidden");
+    }
+
+    // axes
+    let x_axis = d3.axisBottom()
+                    .scale(x_scale);
+
+    let y_axis = d3.axisLeft()
+                    .scale(y_scale);
+
+    svg.append("g")
+        .attr("transform","translate(0, " + (svg_h - bottom_marg) + ")")
+        .call(x_axis)
+        .style("stroke-width","2px")
+        .style("font-size","12px");
+
+    svg.append("g")
+        .attr("transform","translate(" + left_marg + ", 0)")
+        .call(y_axis)
+        .style("stroke-width","2px")
+        .style("font-size","12px");;
+
+    svg.append("text")
+        .text("Emperor")
+        .attr("text-anchor", "middle")
+        .style("font", "18px sans-serif")
+        .attr("x", (svg_w/2))
+        .attr("y",(svg_h - bottom_marg) + (2 * bottom_marg/3));
+
+    svg.append("text")
+        .text("Coin Weight (grams)")
+        .attr("text-anchor", "middle")
+        .style("font", "18px sans-serif")
+        .attr("transform", "translate(" + (left_marg/3) + "," 
+        + (svg_h/2) + ")rotate(-90)");
+
+});
+
+// event handlers
+function handleMouseover(event, d){
+    let x = event.pageX;
+    let y = event.pageY - 52;
+
+    d3.select("body").append("div")
+        .html("Coin No. " + d.num + "<br>" +
+            "Mint: " + d.mint + "<br>" +
+            "Weight: " + d.weight + " g")
+        .style("position","absolute")
+        .style("left", x + "px")
+        .style("top", y + "px")
+        .style("background", "white")
+        .style("padding", "2px")
+        .style("border", "2px solid gray")
+        .style("font","12px sans-serif")
+        .attr("className", "tooltip");
+}
+
+function handleMouseout(event){
+    d3.selectAll(".tooltip").remove();
+}
+
+function handleButton(){
+    if(!boxplot_on){
+        d3.selectAll(".bp")
+            .style("visibility", "visible");
+        boxplot_on = true;
+    }
+    else{
+        d3.selectAll(".bp")
+            .style("visibility", "hidden");
+        boxplot_on = false;
+    }
+}
+
+function handleBoxplotMouseover(event, d){
+    let x = event.pageX;
+    let y = event.pageY - 80;
+
+    let text = d3.select(this).datum();
+    let content = "Min: " + text[0] + "<br>" + 
+        "25%ile: " + text[1] + "<br>" +
+        "50%ile: " + text[2] + "<br>" + 
+        "75%ile: " + text[3] + "<br>" + 
+        "Max: " + text[4];
+
+    d3.select("body").append("div")
+        .html(content)
+        .style("position","absolute")
+        .style("left", x + "px")
+        .style("top", y + "px")
+        .style("background", "white")
+        .style("padding", "2px")
+        .style("border", "2px solid gray")
+        .style("font","12px sans-serif")
+        .attr("className", "tooltip");
+}
+
+function handleFilter() {
+
+    //console.log(stats_by_emp);
+
+    let filter_elems = document.getElementsByName("filter");
+
+    let filter_val = 0;
+    for(let i = 0; i < filter_elems.length; i++){
+        if(filter_elems[i].checked){
+            filter_val = filter_elems[i].value;
+        }
+    }
+
+    d3.selectAll("circle")
+        .style("visibility","visible");
+
+    if(filter_val > 0){
+        d3.selectAll("circle")
+            .filter((d) => {
+                let median = stats_by_emp[d.emperor][2];
+                let std_dev = stats_by_emp[d.emperor][5];
+                let upper = median + filter_val * std_dev;
+                let lower = median + filter_val * std_dev * -1;
+                return !((d.weight < upper) && (d.weight > lower)); 
+            })
+            .style("visibility","hidden");
+    }
+}
+
+export {node, handleButton, handleFilter};
