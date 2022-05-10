@@ -18,7 +18,7 @@ class Map extends Component {
       super(props)
 
       // Set initial state
-      this.state = {pdf : 'https://www.zeemaps.com/pub?group=4395291&legend=1', m1 : 'map1_c', m2 : 'map2', width: 1200,
+      this.state = {pdf : 'https://www.zeemaps.com/pub?group=4382570&legend=1', m1 : 'map1_c', m2 : 'map2', width: 1200,
                     b1: 'mint_t_c', b2: 'mint', b3: 'mint', b4: 'mint', b5: 'mint', b6: 'mint', b7: 'mint', b8: 'mint_b',
                     display: 'buttons_alt', s1: 'select_alt'}
 
@@ -38,7 +38,7 @@ class Map extends Component {
     handleClick1(){
 
       // Changing state
-      this.setState({ pdf : 'https://www.zeemaps.com/pub?group=4395291&legend=1' })
+      this.setState({ pdf : 'https://www.zeemaps.com/pub?group=4382570&legend=1' })
 
       this.setState({m1 : 'map1_c'})
       this.setState({m2 : 'map2'})
@@ -199,7 +199,7 @@ class Map extends Component {
                 <nav className='separator1'></nav>
 
                 <button className={this.state.m2} onClick={this.handleClick2}>
-                    Mint Map
+                    Mint Maps
                 </button>
 
             </nav>
