@@ -32,7 +32,7 @@ export const getCoinByHoard = (req, res) => {
 
     // find coins based on hoard number in url path
     CoinEntry
-        .find({ "Hoard #": hoardNum }, 
+        .find({ "Hoard #": { $regex: new RegExp(hoardNum, "i") } }, 
             (err, result) => {
                 if (err) console.log(err);
                 else {
@@ -46,7 +46,7 @@ export const getCoinByEmperor = (req, res) => {
 
     // find coins based on emperor name in url path
     CoinEntry
-        .find({ "Emperor": { $regex: new RegExp(emperorName,"i") } }, 
+        .find({ "Emperor": { $regex: new RegExp(emperorName, "i") } }, 
             (err, result) => {
                 if (err) console.log(err);
                 else {

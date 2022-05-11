@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const coinSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    'Hoard #': Number,
+    'Hoard #': String,
     'Emperor': String,
     'Emperor Rule - Start Date': Date,
     'Emperor Rule - End Date': Date,
