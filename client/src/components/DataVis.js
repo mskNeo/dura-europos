@@ -3,7 +3,6 @@ import { getAllCoins } from '../api';
 
 export default function DataVis() {
     const [ emperors, setEmperors ] = useState({});
-    // const [ elems, setElems ] = useState([]);
 
     useEffect(() => {
         getAllCoins()
@@ -15,12 +14,6 @@ export default function DataVis() {
                 setEmperors(empObj);
             });
     }, []);
-
-    // useEffect(() => {
-    //     let sortedEmperors = Object.entries(emperors).sort((a, b) => new Date(a[1]) - new Date(b[1]));
-    //     console.log(sortedEmperors);
-    //     setElems([...sortedEmperors]);
-    // }, [emperors]);
 
     return (
         <div>
